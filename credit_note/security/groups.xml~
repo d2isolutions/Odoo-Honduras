@@ -10,7 +10,7 @@
 <!-- Permisos para Notas de credito -->
 <record id="credit_note.group_credit_note_user" model="res.groups">
 <field name="category_id" ref="module_category_credit_note"/>
-<field name="name">Credit Note / User</field>
+<field name="name">Credit Note for Customer / User</field>
 </record>
 
 <record id="credit_note.group_credit_note_manager" model="res.groups">
