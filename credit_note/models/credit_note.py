@@ -15,26 +15,27 @@ class CreditNote(models.Model):
 	amount=fields.Float("Amount",required=True)
 	invoice_number= fields.Char("Invoice number", readonly= True)
 
-	
-	def _get_date(self, cr, uid, context=None):
-		active_id = context and context.get('active_id', False)
-		if active_id:
-            		inv = self.pool.get('account.invoice').browse(cr, uid, active_id, context=context)		
+	@api.model
+	def _get_date(self):
+		ctx = self._context
+		if 'active_id' in ctx:
+            		inv = self.env['account.invoice'].browse(ctx['active_id'])	
             		return inv.date_invoice	
 	
-	
-	def _get_amount(self, cr, uid, context=None):
-		active_id = context and context.get('active_id', False)
-		if active_id:
-            		inv = self.pool.get('account.invoice').browse(cr, uid, active_id, context=context)		
+	@api.model
+	def _get_amount(self):
+		ctx = self._context
+		if 'active_id' in ctx:
+            		inv = self.env['account.invoice'].browse(ctx['active_id'])		
             		return inv.residual
         	else:
 			return 0.00
 		
-	def _get_invoice_number(self, cr, uid, context=None):
-		active_id = context and context.get('active_id', False)
-		if active_id:
-            		inv = self.pool.get('account.invoice').browse(cr, uid, active_id, context=context)		
+	@api.model
+	def _get_invoice_number(self):
+		ctx = self._context
+		if 'active_id' in ctx:
+            		inv = self.env['account.invoice'].browse(ctx['active_id'])		
             		return inv.number
         	else:
 			raise except_orm(_('Warning'), _('!! Invoice is draft, Invoice must be in validate state!!'))
@@ -43,8 +44,6 @@ class CreditNote(models.Model):
 	'date_note': _get_date,
         'amount': _get_amount,
 	'invoice_number':_get_invoice_number,
-
-	#'name': _get_name,
    	 }
 
 	

@@ -8,7 +8,7 @@
            "sale",
 		"account"
           ],
- "data": ["views/credit_note_view.xml",
+ "data": ["views/credit_note_inv_view.xml",
 	"views/account_credit_note.xml"	
         ],
 'update_xml' : [

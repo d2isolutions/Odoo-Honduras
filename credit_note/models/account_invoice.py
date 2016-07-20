@@ -34,6 +34,23 @@ class Notascredito(models.Model):
     check_status = fields.Boolean("Invoice paid",  compute='_compute_check')
     amount_paid = fields.Float('Amount paid', help="Is residual - amount credit note",compute='_amount_paid')
 	
+
+    @api.multi
+    def get_action_credit_note(self):
+        view_id = self.env.ref("credit.note.credit_note_view_invoice", False)
+	for inv in self:
+            return {
+                'name':_("Credi Note Customer"),
+                'view_mode': 'form',
+                'view_id': view_id,
+                'view_type': 'form',
+                'res_model': 'credit.note',
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                'target': 'new',
+                'domain': '[]',
+        }
+
     @api.one
     @api.depends(
         'state', 'currency_id', 'invoice_line.price_subtotal',

@@ -25,7 +25,7 @@
                </form>
 </field>
 </record>	
-	<record id="allanchupamela" model="ir.actions.act_window">
+	<record id="action_credit_note_customer" model="ir.actions.act_window">
             <field name="name">Credit Note Customer</field>
             <field name="res_model">credit.note</field>
             <field name="view_type">form</field>

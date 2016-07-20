@@ -7,11 +7,11 @@
             <field name="inherit_id" ref="account.invoice_form"/>
 <field name="arch" type="xml">
       	 <xpath expr="//button[@string='Refund Invoice']" position="replace">
-       <button name="%(action_credit_note_customer)d" type="action" string="Credit Note"
+       <button name="_get_action_credit_note" type="object" string="Credit Note"
                         attrs="{'invisible': ['|', ('state','!=','open'), ('type','!=','out_invoice')]}" groups="base.group_user"/>
         </xpath>
         <field name="residual" position="after">
-<field name="amount_paid" invisible="1"/> 
+<field name="amount_paid" /> 
 <field name="amount_credit_note" readonly="1" attrs="{'invisible': ['|',('state', 'in', ('draft','sent')), ('type','!=','out_invoice') ]}"/>
 <field name="check_status" invisible="1"/>
 	</field>
